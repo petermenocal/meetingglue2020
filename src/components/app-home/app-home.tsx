@@ -27,7 +27,7 @@ export class AppHome {
       <xhl-header active={this.active} user={this.user} firebase={this.firebase} />,
       <ion-content>
         <ion-list>
-          {this.rfps.map((x, key) => (
+          {this.rfps.map(x => (
             <a href={`rfps/${x.key}`}>
               <ion-item>RFP ID {x.key}</ion-item>
             </a>
