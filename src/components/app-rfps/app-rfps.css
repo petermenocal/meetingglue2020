@@ -1,0 +1,12 @@
+:host {
+  display: block;
+}
+.rooms-type {
+  height: 75px;
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+.event-table-row {
+  border-bottom: 1px solid white;
+}

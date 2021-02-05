@@ -1,0 +1,13 @@
+{
+  "appId": "com.meetingglue.app",
+  "appName": "meeting-glue",
+  "bundledWebRuntime": false,
+  "npmClient": "npm",
+  "webDir": "www",
+  "plugins": {
+    "SplashScreen": {
+      "launchShowDuration": 0
+    }
+  },
+  "cordova": {}
+}

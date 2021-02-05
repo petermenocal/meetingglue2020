@@ -1,0 +1,51 @@
+:host {
+  display: block;
+}
+div {
+  position: relative !important;
+  display: inline-block;
+  height: 420px;
+  width: 100%;
+}
+.image {
+  position: absolute;
+  z-index: 0;
+  top: 0;
+}
+ion-img::part(image) {
+  object-fit: cover;
+  min-height: 420px !important;
+}
+.headline {
+  font-size: 3rem;
+  max-width: 400px;
+  line-height: 2.4rem;
+  text-transform: uppercase;
+  margin-bottom: 7px;
+  margin-top: 70px;
+}
+.text {
+  z-index: 100;
+  left: 15%;
+  top: 0;
+  position: absolute;
+  max-width: 400px;
+  line-height: 1.5rem;
+}
+/* small */
+@media (max-width: 767.98px) {
+  .text {
+    left: 5%;
+    top: auto;
+    bottom: 0;
+  }
+}
+a {
+  padding: 5px 0;
+  margin-bottom: 5px;
+  text-decoration: none;
+  text-transform: uppercase;
+  font-weight: bold;
+  letter-spacing: 2px;
+  color: white;
+}
