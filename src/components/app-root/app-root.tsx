@@ -3,7 +3,6 @@ import firebase from 'firebase/app';
 import 'firebase/analytics';
 import 'firebase/database';
 import 'firebase/auth';
-import { toastController } from '@ionic/core';
 import { menuController } from '@ionic/core';
 import { version } from '../../../package.json';
 
@@ -16,28 +15,8 @@ export class AppRoot {
   @State() loading: boolean = true;
   @Prop() deviceUUID;
   @Prop() version = version;
-  @Listen('swUpdate', { target: 'window' })
-  async onSWUpdate() {
-    const registration = await navigator.serviceWorker.getRegistration();
-
-    if (!registration || !registration.waiting) {
-      // If there is no registration, this is the first service
-      // worker to be installed. registration.waiting is the one
-      // waiting to be activiated.
-      return;
-    }
-    const toast = await toastController.create({
-      message: 'An update for this site is available. Refreshing cache.',
-      duration: 3000,
-      position: 'top',
-      color: 'primary',
-    });
-    await toast.present();
-    await toast.onWillDismiss();
-
-    registration.waiting.postMessage('skipWaiting');
-    window.location.reload();
-  }
+  db;
+  auth;
   firebaseConfig = {
     apiKey: 'AIzaSyCAcniDZSBPktuJNSTJ3F6FZnKN6rB-JjI',
     authDomain: 'mglue-ebc2f.firebaseapp.com',
@@ -49,8 +28,7 @@ export class AppRoot {
     measurementId: 'G-4MFVQYD0GJ',
   };
   logout() {
-    firebase
-      .auth()
+    this.auth()
       .signOut()
       .then(
         function () {
@@ -64,8 +42,9 @@ export class AppRoot {
 
   componentWillLoad = () => {
     firebase.initializeApp(this.firebaseConfig);
-    firebase.analytics();
-    firebase.auth().onAuthStateChanged(user => {
+    this.db = firebase.database();
+    this.auth = firebase.auth();
+    this.auth.onAuthStateChanged(user => {
       this.user = user ? user : null;
       this.loading = false;
     });
@@ -78,12 +57,12 @@ export class AppRoot {
     return (
       <ion-app>
         <ion-router useHash={false}>
-          <ion-route url="/" component="app-home" componentProps={{ active: 'home', firebase: firebase, user: this.user }} />
+          <ion-route url="/" component="app-home" componentProps={{ active: 'home', db: this.db, firebase: firebase, user: this.user }} />
           <ion-route url="/hotels" component="app-hotels" componentProps={{ active: 'hotels', firebase: firebase, user: this.user }} />
           <ion-route url="/cvbs" component="app-cvbs" componentProps={{ active: 'cvbs', firebase: firebase, user: this.user }} />
-          <ion-route url="/rfps" component="app-rfps" componentProps={{ active: 'rfps', firebase: firebase, user: this.user }} />
-          <ion-route url="/rfps/:rfpid" component="rfp-negotiate" componentProps={{ active: 'rfp detail', firebase: firebase, user: this.user }} />
-          <ion-route url="/negotiate" component="rfp-negotiate" componentProps={{ active: 'rfp neg', firebase: firebase, user: this.user }} />
+          <ion-route url="/rfps" component="app-rfps" componentProps={{ active: 'rfps', db: this.db, firebase: firebase, user: this.user }} />
+          <ion-route url="/rfps/:rfpid" component="rfp-negotiate" componentProps={{ active: 'rfp detail', db: this.db, firebase: firebase, user: this.user }} />
+          <ion-route url="/negotiate" component="rfp-negotiate" componentProps={{ active: 'rfp neg', db: this.db, firebase: firebase, user: this.user }} />
           <ion-route url="/login" component="app-login" componentProps={{ active: 'login', firebase: firebase, user: this.user }} />
           <ion-route url="/forgot-password" component="app-forgot-password" componentProps={{ firebase: firebase, user: this.user }} />
           <ion-route url="/profile" component="app-profile" componentProps={{ active: 'profile', firebase: firebase, user: this.user, deviceUUID: this.deviceUUID }} />

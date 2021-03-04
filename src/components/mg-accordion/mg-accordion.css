@@ -1,18 +1,22 @@
 .accordion {
   cursor: pointer;
-  padding: 18px;
+  padding: 10px;
   text-align: left;
+  background: rgba(0, 0, 0, 0);
   width: 100%;
-  background: black;
+  min-width: 100vw;
   color: whitesmoke;
   border: none;
-  font-size: 1.2rem;
+  font-size: 1rem;
   font-weight: bold;
   outline: 0;
 }
 .accordion:hover {
-  background: rgba(255, 255, 255, 0.2);
-  transition: all 0.2s ease-out;
+  background: rgba(255, 255, 255, 0.1);
+  transition: all 0.4s ease-out;
+}
+.accordion span {
+  float: right;
 }
 .open {
   display: block;

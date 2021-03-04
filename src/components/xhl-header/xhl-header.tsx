@@ -25,23 +25,20 @@ export class XhlHeader {
     return (
       <Host>
         <slot>
-          <ion-toolbar color={this.color} mode="ios">
-            <ion-title class="title ">
-              <a href="/">
-                <img src={getAssetPath('./assets/logo__meeting_glue.png')} height="30" alt="" />
-              </a>
+          <ion-toolbar>
+            <ion-title>
+              <img src={getAssetPath('./assets/logo__meeting_glue.png')} height="30" alt="" />
             </ion-title>
-            <ion-buttons class="hide-md-up">
-              <ion-menu-button></ion-menu-button>
-            </ion-buttons>
-            <ion-buttons class="hide-md-down" slot="end">
-              <ion-button href="/" class={this.active == 'home' ? 'active' : null}>
-                Home
-              </ion-button>
+            <ion-buttons slot="end">
               <ion-button href="/hotels" class={this.active == 'hotels' ? 'active' : null}>
                 Hotels
               </ion-button>
-
+              <ion-button href="/" fill="clear" color="primary">
+                List RFPS
+              </ion-button>
+              <ion-button href="/rfps" fill="clear" color="primary">
+                New RFP
+              </ion-button>
               {this.user ? (
                 [
                   <ion-button

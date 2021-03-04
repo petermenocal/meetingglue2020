@@ -1,4 +1,4 @@
-import { Component, Host, h, Prop } from '@stencil/core';
+import { Component, Host, h, State, Prop } from '@stencil/core';
 import moment from 'moment';
 
 @Component({
@@ -7,19 +7,21 @@ import moment from 'moment';
   shadow: true,
 })
 export class AppRfps {
-  @Prop() days;
-  @Prop() start = new Date().toLocaleString();
-  @Prop() end = new Date().toLocaleString();
-  @Prop() eventDays = [];
-  @Prop() step = 1;
-  @Prop() roomTypeBlockCount = [1];
+  @Prop() active;
+  @Prop() user;
+  @Prop() firebase;
+  @State() days;
+  @State() start = new Date().toLocaleString();
+  @State() end = new Date().toLocaleString();
+  @State() eventDays = [];
+  @State() step = 1;
+  @State() roomTypeBlockCount = [1];
   handleEndChange(event) {
     this.end = event.target.value;
-    let t = this;
     this.eventDays = [];
     let x = moment(this.end).diff(moment(this.start), 'days');
     for (let step = 0; step < x; step++) {
-      t.eventDays = [...t.eventDays, { eventDay: step + 1, date: '', roomsCount: 0, roomsType: '' }];
+      this.eventDays = [...this.eventDays, { eventDay: step + 1, date: '', roomsCount: 0, roomsType: '' }];
     }
   }
   handleStartChange(event) {
@@ -45,28 +47,8 @@ export class AppRfps {
     return (
       <Host>
         <slot>
-          <ion-toolbar>
-            <ion-buttons>
-              <a href="/">
-                <ion-button fill="solid">List</ion-button>
-              </a>
-              <a href="/rfps">
-                <ion-button fill="solid">Step One</ion-button>
-              </a>
-              <a href="/negotiate">
-                <ion-button fill="solid">Step Two</ion-button>
-              </a>
-            </ion-buttons>
-          </ion-toolbar>
           <ion-content>
-            <ion-refresher
-              slot="fixed"
-              onIonRefresh={() => {
-                window.location.reload();
-              }}
-            >
-              <ion-refresher-content></ion-refresher-content>
-            </ion-refresher>
+            <xhl-header active={this.active} user={this.user} firebase={this.firebase} />
             {/* step one */}
             <ion-grid fixed>
               <h1>New RFP</h1>
@@ -176,6 +158,13 @@ export class AppRfps {
                   </ion-card-content>
                 </ion-card>
               ))}
+              <ion-row>
+                <ion-col>
+                  <ion-toolbar color="clear">
+                    <ion-button slot="end">Next Step</ion-button>
+                  </ion-toolbar>
+                </ion-col>
+              </ion-row>
             </ion-grid>
           </ion-content>
         </slot>

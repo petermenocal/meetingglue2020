@@ -1,7 +1,9 @@
 :host {
   display: block;
 }
-
+.tc {
+  text-align: center;
+}
 .vertical-align-content > * {
   display: flex !important;
   align-content: center !important;

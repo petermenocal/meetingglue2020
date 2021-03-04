@@ -1,8 +1,8 @@
 {
-  "name": "exhale-brands",
+  "name": "meetingglue",
   "private": true,
   "version": "0.0.1",
-  "description": "exhale-brands",
+  "description": "meetingglue",
   "license": "MIT",
   "files": [
     "dist/"

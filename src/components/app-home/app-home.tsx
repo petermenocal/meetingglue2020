@@ -13,7 +13,7 @@ export class AppHome {
     this.firebase
       .database()
       .ref('rfps')
-      .on('value', snapshot => {
+      .once('value', snapshot => {
         t.rfps = [];
         snapshot.forEach(childSnap => {
           let x = childSnap.val();
@@ -25,12 +25,13 @@ export class AppHome {
   render() {
     return [
       <xhl-header active={this.active} user={this.user} firebase={this.firebase} />,
+      <ion-toolbar>
+        <ion-title>RFPS - In Progress</ion-title>
+      </ion-toolbar>,
       <ion-content>
         <ion-list>
           {this.rfps.map(x => (
-            <a href={`rfps/${x.key}`}>
-              <ion-item>RFP ID {x.key}</ion-item>
-            </a>
+            <ion-item href={`rfps/${x.key}`}>RFP ID {x.key}</ion-item>
           ))}
         </ion-list>
       </ion-content>,

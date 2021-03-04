@@ -8,10 +8,12 @@ import { Component, Host, h, Prop } from '@stencil/core';
 export class AppHotels {
   @Prop() firebase;
   @Prop() hotels = [];
+  @Prop() active;
+  @Prop() user;
   componentWillLoad() {
     let t = this;
     let hots = this.firebase.default.database().ref('hotels/arlington');
-    hots.on('value', snapshot => {
+    hots.once('value', snapshot => {
       snapshot.forEach(childSnap => {
         t.hotels = [childSnap.val(), ...t.hotels];
       });
@@ -21,14 +23,24 @@ export class AppHotels {
     return (
       <Host>
         <slot>
-          <xhl-header></xhl-header>
-          <ion-toolbar></ion-toolbar>
+          <xhl-header active={this.active} user={this.user} firebase={this.firebase} />
+          <ion-toolbar>
+            <ion-title>Hotels</ion-title>
+          </ion-toolbar>
           <ion-content>
-            <ion-list>
-              {this.hotels.map(x => (
-                <mg-accordion label="label" hotel={x}></mg-accordion>
-              ))}
-            </ion-list>
+            <ion-grid>
+              <ion-row>
+                <ion-col>
+                  <ion-list>
+                    {this.hotels.map(x => (
+                      <ion-item lines={'inset'}>
+                        <mg-accordion label="label" hotel={x}></mg-accordion>
+                      </ion-item>
+                    ))}
+                  </ion-list>
+                </ion-col>
+              </ion-row>
+            </ion-grid>
           </ion-content>
         </slot>
       </Host>

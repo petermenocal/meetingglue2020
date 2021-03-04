@@ -7,16 +7,11 @@ import { Component, State, EventEmitter, Event, Prop, h } from '@stencil/core';
 })
 export class MgAccordion {
   @State() toggle: boolean = false;
-
   @Prop() label: string;
-
   @Prop() description: string;
-
   @Prop() width: string;
-
   @Prop() color: string;
   @Prop() hotel;
-
   @Event() toggleEv: EventEmitter;
   toggleComponent() {
     this.toggle = !this.toggle;

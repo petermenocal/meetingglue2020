@@ -21,8 +21,10 @@ export namespace Components {
         "user": any;
     }
     interface AppHotels {
+        "active": any;
         "firebase": any;
         "hotels": any[];
+        "user": any;
     }
     interface AppLogin {
         "active": any;
@@ -46,12 +48,9 @@ export namespace Components {
     interface AppRfpDetail {
     }
     interface AppRfps {
-        "days": any;
-        "end": string;
-        "eventDays": any[];
-        "roomTypeBlockCount": number[];
-        "start": string;
-        "step": number;
+        "active": any;
+        "firebase": any;
+        "user": any;
     }
     interface AppRoot {
         "deviceUUID": any;
@@ -72,16 +71,11 @@ export namespace Components {
         "complete": (ev: any, data: any) => Promise<void>;
     }
     interface RfpNegotiate {
+        "active": any;
+        "db": any;
         "firebase": any;
-        "hotels": any[];
-        "hotelsInComparisonMatrix": any[];
-        "proposedComp1BRSuite": boolean;
-        "proposedCompMeetingRoomRental": boolean;
-        "proposedCompWifi": boolean;
-        "proposedRoomsRate": string;
-        "proposedRoomsTax": string;
         "rfpid": any;
-        "sending": boolean;
+        "user": any;
     }
     interface XhlHeader {
         "active": any;
@@ -232,8 +226,10 @@ declare namespace LocalJSX {
         "user"?: any;
     }
     interface AppHotels {
+        "active"?: any;
         "firebase"?: any;
         "hotels"?: any[];
+        "user"?: any;
     }
     interface AppLogin {
         "active"?: any;
@@ -257,12 +253,9 @@ declare namespace LocalJSX {
     interface AppRfpDetail {
     }
     interface AppRfps {
-        "days"?: any;
-        "end"?: string;
-        "eventDays"?: any[];
-        "roomTypeBlockCount"?: number[];
-        "start"?: string;
-        "step"?: number;
+        "active"?: any;
+        "firebase"?: any;
+        "user"?: any;
     }
     interface AppRoot {
         "deviceUUID"?: any;
@@ -284,16 +277,11 @@ declare namespace LocalJSX {
         "onElementDropped"?: (event: CustomEvent<any>) => void;
     }
     interface RfpNegotiate {
+        "active"?: any;
+        "db"?: any;
         "firebase"?: any;
-        "hotels"?: any[];
-        "hotelsInComparisonMatrix"?: any[];
-        "proposedComp1BRSuite"?: boolean;
-        "proposedCompMeetingRoomRental"?: boolean;
-        "proposedCompWifi"?: boolean;
-        "proposedRoomsRate"?: string;
-        "proposedRoomsTax"?: string;
         "rfpid"?: any;
-        "sending"?: boolean;
+        "user"?: any;
     }
     interface XhlHeader {
         "active"?: any;
