@@ -40,7 +40,7 @@
     "@willson/mapkit-map": "^1.0.4",
     "bottleneck": "^2.19.5",
     "cordova-plugin-device": "^2.0.3",
-    "firebase-admin": "^9.4.2",
+    "firebase-admin": "^11.4.1",
     "firebase-functions": "^3.13.1",
     "jsbarcode": "^3.11.3",
     "workbox-sw": "^6.0.2"
